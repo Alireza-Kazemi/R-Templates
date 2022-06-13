@@ -53,8 +53,6 @@ ggplot(Sdat,aes(x=age_group, y=value, fill = condition)) +
         strip.text.y = element_text(size=16, face="bold"))
 		
  
- 
- 
 Fig1 = ggplot(Sdat,aes(x=age_group, y=Corval, fill = condition)) + 
 		geom_bar(stat="summary",fun="mean",position="dodge")+
 		geom_jitter(position = position_jitterdodge(jitter.width = .4,
