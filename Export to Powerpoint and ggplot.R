@@ -5,6 +5,8 @@ setwd(x)
 getwd()
 
 
+library(export)
+graph2ppt(file="Figagreetohint1.pptx",width = 5, height = 5)
 
 library(pacman)
 p_load(reshape2,ez,lme4,lmerTest,
