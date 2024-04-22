@@ -23,6 +23,46 @@ p_load(data.table,
        rstatix,
        emmeans,
        correlation)
+#--------------------------- Correlation Function 
+ComputeCorrelations <- function(sDat, Par1Names, Par2Names, sessID, par1ColNames = "Cluster", par2ColName = "Subfield"){
+  CorVals = NULL
+  for (Par1 in Par1Names)
+  {
+    for (Par2 in Par2Names)
+    {
+      Vals = correlation(data = sDat,
+                         select = Par1,
+                         select2 = c(Par2,"ICV"),
+                         partial = T,
+                         p_adjust = "none")
+      CorVals = rbind(CorVals,Vals[Vals$Parameter2!="ICV",])
+    }
+  }
+  A = as.data.frame(CorVals[CorVals$Parameter2!="ICV",c("Parameter1","Parameter2","r","p","t","df_error","n_Obs","CI_low","CI_high")])
+  A$Sig = unique("")
+  A$Sig[A$p<0.05] = unique("*")
+  A$Sig[A$p<0.01] = unique("**")
+  names(A) = c("Pars1", par2ColName, "r", "p","t","df","n_Obs","CI_low","CI_high", "Sig")
+  for (idx in 1:length(par1ColNames)){
+    A[,par1ColNames[idx]] = sapply(A[,"Pars1"], function(x) strsplit(x,split = "_")[[1]][idx])
+  }
+  A$sessID = sessID
+  A = A[,c(par1ColNames, par2ColName,"sessID","r", "p","t","df","n_Obs","CI_low","CI_high", "Sig")]
+  return(A)
+}
+
+sDat =  pivot_wider(sDat,id_cols = c("SID","sessID"),
+                    names_from = c("testName","MeasureName","clusterID"), 
+                    values_from = c("CorrL","IncorrL","Diff"),names_sep = "_")
+
+par1ColNames = c("condition","testName","MeasureName","clusterID")
+Par1Names = names(sDat)[!names(sDat) %in% c("SID","sessID")]
+Par2Names = names(datVol)[!names(datVol) %in% c("SID", "ICV","sessID")]
+sDat = merge(datVol,sDat,by = c("SID","sessID"))
+
+sessID = "t2"
+A = ComputeCorrelations(sDat[sDat$sessID==sessID,], Par1Names, Par2Names, sessID,
+                        par1ColNames, par2ColName = "Subfield")
 	   
 #######################################
 
