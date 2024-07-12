@@ -102,3 +102,17 @@ ggplot(data = graphDat,aes(x = Dist,color = RespType2,group = RespType2))+
                bw = sd(graphDat$Dist)/15,linewidth = 1,alpha = 1,
                fill = NA,position = "identity") +
   facet_grid(ConditionName~Target+RespType2)
+
+
+
+ggplot(data = graphDat,aes(x = GazeX_Shifted,fill = RespType2,color = RespType2,group = RespType2))+
+  geom_histogram(aes(y = after_stat(count/max(count))),
+                 binwidth = sd(graphDat$GazeX_Shifted)/20,alpha = .25,
+                 color = "gray",position = "identity")+
+  geom_density(aes(y = after_stat(count/max(count))),
+               bw = sd(graphDat$GazeX_Shifted)/20,linewidth = 1,alpha = 1,
+               fill = NA,position = "identity") +
+  facet_grid(ConditionName~Target)+
+  theme(panel.background = element_rect(fill = "transparent"),
+        panel.grid.major = element_line(color = alpha("gray", alpha = 0.3)))
+
