@@ -3,6 +3,8 @@ p_load(data.table,
        reshape2,
        ez,
        lme4,
+       car,
+       nlme,
        lmerTest,
        ggplot2,
        grid,
@@ -65,9 +67,6 @@ p = p+annotate(geom="text", x=A$slopes$`Value of ageBase`, y=round(A$slopes$Est.
                label=paste("ageBase = ",round(A$slopes$`Value of ageBase`+min(sDat$ageBase),2),
                            ", Beta = ",round(A$slopes$Est.,2),sep = ""),
                color="#595959")
-# b = ggplot_build(p)
-# p$data[[9]]$colour = "#595959"
-# p = ggplot_gtable(p)
 plot(p)
 WD = "D:\\Projects\\"
 graph2ppt(file= paste(WD,"FileName.pptx",sep = ""), width = 7, height = 5)
