@@ -104,4 +104,4 @@ p =  interact_plot(M, pred = Similarity, modx = ageBase,
 p = p+theme_bw()+gDefault
 plot(p)
 graph2ppt(file= paste(WD,"EMS_Fig6A.pptx",sep = ""), width = 8, height = 5)
-mako(20, alpha = 1, begin = 0, end = 1, direction = 1)
+
