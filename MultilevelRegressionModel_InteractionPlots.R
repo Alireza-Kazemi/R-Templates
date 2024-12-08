@@ -75,13 +75,25 @@ graph2ppt(file= "SamplePlot.pptx", width = 7, height = 5)
 
 #--------- Plot interaction effects ----
 
+fSize = 20
+gDefault =   theme(
+  text = element_text(family = "serif"),
+  strip.text = element_text(size=fSize-2, face="bold"),
+  plot.title = element_text(size = fSize),
+  axis.title = element_text(size = fSize),
+  legend.title = element_text(size=fSize),
+  legend.text=element_text(size=fSize-4),
+  axis.text = element_text(size = fSize-4),
+  panel.background = element_rect(fill = "transparent", color = "black", 
+                                  linewidth = 0.7, linetype =  "solid"),
+  plot.background = element_rect(fill = "transparent"),
+  axis.line = element_line(linewidth = .7, linetype =  "solid"),
+  strip.background = element_rect(fill="transparent"),
+  panel.grid.major.x = element_line(color = alpha("gray", alpha = 0.3)),
+  panel.grid.minor = element_blank()
+)
 
-res = probe_interaction(M, pred = EMS, modx = ageBase, modx.values = c(8,10,12),
-                        plot.points = F, point.alpha = 0.5,point.size = .5,point.shape = T,
-                        line.thickness = 1,vary.lty=F, interval = F,int.type = "confidence",
-                        linearity.check =F, rug =F,partial.residuals = T,centered = "all")
-
-p =  interact_plot(M, pred = EMS, modx = ageBase, 
+p =  interact_plot(M, pred = Similarity, modx = ageBase, 
                    # modx.values = c(8,10,12),
                    plot.points = F, point.alpha = 0.2,point.size = .75,point.shape = F,
                    line.thickness = 1.2,vary.lty=F, interval = T,int.type = "confidence",
