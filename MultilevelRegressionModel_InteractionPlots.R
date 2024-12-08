@@ -93,15 +93,17 @@ gDefault =   theme(
   panel.grid.minor = element_blank()
 )
 
-p =  interact_plot(M, pred = Similarity, modx = ageBase, 
+p =  interact_plot(M, pred = Similarity, modx = ageChange, mod2 = Condition,
                    # modx.values = c(8,10,12),
                    plot.points = F, point.alpha = 0.2,point.size = .75,point.shape = F,
                    line.thickness = 1.2,vary.lty=F, interval = T,int.type = "confidence",
                    linearity.check =F, rug =F,partial.residuals = F,centered = "all",
-                   y.label = "Item-Location Memory Accuracy",
-                   x.label = "Differential EMS",
+                   # y.label = "Item-Location Memory Accuracy",
+                   # x.label = "Differential EMS",
                    colors =c("#7ED7AFFF","#3573A1FF","#3A2C59FF") )
+
 p = p+theme_bw()+gDefault
+p = p+ facet_wrap(ageChange~Condition,nrow = 2)
 plot(p)
-graph2ppt(file= paste(WD,"EMS_Fig6A.pptx",sep = ""), width = 8, height = 5)
+graph2ppt(file= paste(WD,"Intreaction.pptx",sep = ""), width = 8, height = 5)
 
