@@ -69,7 +69,8 @@ p = p+annotate(geom="text", x=A$slopes$`Value of ageBase`, y=round(A$slopes$Est.
 # p$data[[9]]$colour = "#595959"
 # p = ggplot_gtable(p)
 plot(p)
-graph2ppt(file= paste(WD,"EMS_FigS3.pptx",sep = ""), width = 7, height = 5)
+WD = "D:\\Projects\\"
+graph2ppt(file= paste(WD,"FileName.pptx",sep = ""), width = 7, height = 5)
 
 
 #--------- Plot interaction effects ----
