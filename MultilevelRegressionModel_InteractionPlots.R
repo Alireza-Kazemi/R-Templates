@@ -68,8 +68,9 @@ p = p+annotate(geom="text", x=A$slopes$`Value of ageBase`, y=round(A$slopes$Est.
                            ", Beta = ",round(A$slopes$Est.,2),sep = ""),
                color="#595959")
 plot(p)
-WD = "D:\\Projects\\"
-graph2ppt(file= paste(WD,"FileName.pptx",sep = ""), width = 7, height = 5)
+WD = "D:\\Plots\\"
+graph2ppt(file= paste(WD,"SamplePlot.pptx",sep = ""), width = 7, height = 5)
+graph2ppt(file= "SamplePlot.pptx", width = 7, height = 5)
 
 
 #--------- Plot interaction effects ----
