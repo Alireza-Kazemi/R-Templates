@@ -16,7 +16,7 @@ RemoveOutliers <- function(data,factorNames,varNames,Criteria=3.29){
   # Using mutate
   data = data %>% group_by_at(factorNames)%>%
     mutate_at(varNames,
-              ~ ifelse(as.vector(abs(scale(.,center = TRUE, scale = TRUE)))>3,NA,.)) %>%
+              ~ ifelse(as.vector(abs(scale(.,center = TRUE, scale = TRUE)))>Criteria,NA,.)) %>%
     as.data.frame()
   return(data)
 }
