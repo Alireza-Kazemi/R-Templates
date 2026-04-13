@@ -16,6 +16,33 @@ p_load(reshape2,ez,lme4,lmerTest,
        PerformanceAnalytics,officer,rvg)
 
 
+
+
+allVicinityPlots[[pIdx]] = p; pIdx = pIdx+1;
+mydoc = read_pptx();
+mydoc = slide_size(mydoc, width = 8.5, height = 11)
+mydoc = add_slide(mydoc, layout = "Title and Content",master = "Office Theme")
+myPlt = dml(code = plot(p))
+mydoc = ph_with(
+  mydoc,
+  value = myPlt,
+  location = ph_location(left = 1,top = 1, width = 7, height = 6)
+  )
+print(mydoc, target = paste(WD,"Vicinity_Fig5A_N.pptx",sep = "") )
+
+graph2ppt(file= paste(WD,"Vicinity_Figures.pptx",sep = ""),
+          width = 4, 
+          height = 3,
+          paper = "letter",
+          orient = "portrait",
+          scaling = 100,
+          append = T,
+          center = T,
+          margins = c(top = 0, right = 0, bottom = 0, left = 0),
+          )
+
+
+
 graph_defaults=theme(axis.ticks.x=element_blank())+
   theme(axis.title.x = element_text(size = 18,vjust=-0.25))+
   theme(axis.title.y = element_text(size = 18))+
@@ -344,7 +371,7 @@ plot(plotTres3)
 # Writing Out Graphs ------------------------------------------------------
 
 mydoc = read_pptx();
-
+mydoc <- slide_size(mydoc, width = 8.5, height = 11)
 mydoc = add_slide(mydoc, layout = "Title and Content",master = "Office Theme")
 myPlt = dml(code = plot(plotAcc1))
 mydoc = ph_with(mydoc,value = myPlt,location = ph_location(left = 1,top = 2, width = 3, height = 5 ))
